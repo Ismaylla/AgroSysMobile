@@ -1,34 +1,30 @@
-// hooks/useTheme.ts
+// hooks/useTheme.tsx (CORRIGIDO: Removendo lógica de tema escuro para evitar vazamento)
 
-// 1. CORREÇÃO: Importar React e o tipo PropsWithChildren para tipar a função corretamente.
-import React, { createContext, useContext, useMemo, PropsWithChildren } from 'react';
-import { useColorScheme } from 'react-native';
+import React, { createContext, PropsWithChildren, useContext, useMemo } from 'react';
+// Removendo useColorScheme para evitar vazamento de tema escuro nativo
+// import { useColorScheme } from 'react-native'; 
 
-// Importa os tokens de design que você definiu em constants/theme
 import { Colors, theme as defaultTheme, Theme } from '../constants/theme';
 
 
-// 1. Cria o Contexto (Valor padrão é o tema light)
+// 1. Cria o Contexto
 const ThemeContext = createContext<Theme>(defaultTheme);
 
 // 2. Provedor de Tema (ThemeProvider)
-// Usa PropsWithChildren para tipar as props, resolvendo o erro de sintaxe/tipagem.
 export function ThemeProvider({ children }: PropsWithChildren) {
-  // Detecta o tema do sistema (light ou dark)
-  const colorScheme = useColorScheme();
+  // CORREÇÃO: Desativamos a lógica de tema dinâmico para forçar o tema CLARO
+  // const colorScheme = useColorScheme(); 
   
-  // Usa useMemo para calcular o objeto de tema apenas quando o 'colorScheme' mudar.
   const theme = useMemo(() => {
-    // Escolhe a paleta de cores correta baseada na detecção do sistema
-    const colorPalette = colorScheme === 'dark' ? Colors.dark : Colors.light;
+    // Usamos diretamente a paleta CLARA, que tem o fundo BEGE
+    const colorPalette = Colors.light; 
 
     return {
-      // Mantém os tokens estáticos (spacing, fonts, weights)
       ...defaultTheme,
-      // Sobrescreve apenas as cores com a paleta dinâmica
       colors: colorPalette, 
+      // Não precisamos de dependências, pois o tema é estático
     };
-  }, [colorScheme]);
+  }, []); // Array de dependências VAZIO
 
   return (
     <ThemeContext.Provider value={theme}>
@@ -38,7 +34,6 @@ export function ThemeProvider({ children }: PropsWithChildren) {
 }
 
 // 3. Hook Personalizado para componentes
-// Este é o hook que todos os outros desenvolvedores (Pessoa 2, 3, 4) irão usar.
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
