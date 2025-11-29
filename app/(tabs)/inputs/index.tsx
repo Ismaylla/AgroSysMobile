@@ -186,7 +186,7 @@ export default function InputsScreen() {
       </View>
 
       <BottomNavButton
-        title="+ Cadastrar Insumo"
+        title=" Cadastrar Insumo"
         onPress={navigateToInputRegistration}
       />
     </SafeAreaView>

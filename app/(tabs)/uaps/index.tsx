@@ -186,7 +186,7 @@ export default function UAPsScreen() {
       </View>
 
       <BottomNavButton
-        title="+ Cadastrar UAP"
+        title="Cadastrar UAP"
         onPress={navigateToUAPRegistration}
       />
     </SafeAreaView>

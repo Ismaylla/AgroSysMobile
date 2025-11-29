@@ -187,7 +187,7 @@ export default function ToolsScreen() {
       </View>
 
       <BottomNavButton
-        title="+ Cadastrar Ferramenta"
+        title="Cadastrar Ferramenta"
         onPress={navigateToToolRegistration}
       />
     </SafeAreaView>

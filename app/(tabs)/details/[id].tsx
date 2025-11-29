@@ -270,7 +270,7 @@ export default function DetailsScreen() {
       ) : (
         // Botão de registro padrão para Produto, Insumo, UAP e caso o item não seja encontrado.
         <BottomNavButton
-          title={`+ Registrar ${entityType}`}
+          title={` Registrar ${entityType}`}
           onPress={() => router.back()}
         />
       )}

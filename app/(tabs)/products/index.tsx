@@ -186,7 +186,7 @@ export default function ProductsScreen() {
       </View>
 
       <BottomNavButton
-        title="+ Cadastrar Produtos"
+        title=" Cadastrar Produtos"
         onPress={navigateToProductRegistration}
       />
     </SafeAreaView>
