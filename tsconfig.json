@@ -2,16 +2,6 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
-    
-    // --- INÍCIO DAS CORREÇÕES ---
-    // Resolve o erro de importação de React e módulos com 'export ='
-    "esModuleInterop": true, 
-    "allowSyntheticDefaultImports": true, 
-    
-    // Garante que o compilador entenda a sintaxe JSX no TypeScript
-    "jsx": "react-native", 
-    // --- FIM DAS CORREÇÕES ---
-    
     "paths": {
       "@/*": [
         "./*"

@@ -3,6 +3,58 @@
 
 // --- PALETA DE CORES AGROSYS (Tokens Base) ---
 // Definimos as cores semânticas e a paleta de cinza que usaremos.
+
+export const Colors1 = {
+  light: {
+    primary: '#165B33', // Verde Escuro (Header, Menu, Botões)
+    secondary: '#C4B5FD', 
+    background: '#EAEAEA', // Fundo Principal (Cinza Claro)
+    card: '#FFFFFF', 
+    text: '#2E1065', 
+    subtleText: '#666666', 
+    inputBackground: '#FFFFFF', 
+    inputBorder: '#CCCCCC', 
+    buttonBackground: '#165B33', 
+    buttonText: '#FFFFFF', 
+    headerText: '#FFFFFF',
+    menuBackground: '#165B33',
+    menuText: '#FFFFFF',
+    categoryBackground: '#165B33', 
+    categoryIcon: '#FFFFFF',
+    categoryTitle: '#FFFFFF',
+    categorySubtitle: '#FFFFFF',
+    detailBackground: '#38761D', // Fundo dos campos de detalhe/cadastro
+    detailLabel: '#FFFFFF',
+    detailInputBackground: '#FFFFFF',
+    detailInputText: '#000000',
+    cancelButtonText: '#FF0000', 
+  },
+  dark: {
+    primary: '#165B33',
+    secondary: '#C4B5FD',
+    background: '#121212',
+    card: '#1e1e1e',
+    text: '#ffffff',
+    subtleText: '#aaaaaa',
+    inputBackground: '#333333',
+    inputBorder: '#555555',
+    buttonBackground: '#165B33',
+    buttonText: '#FFFFFF',
+    headerText: '#FFFFFF',
+    menuBackground: '#165B33',
+    menuText: '#FFFFFF',
+    categoryBackground: '#165B33',
+    categoryIcon: '#FFFFFF',
+    categoryTitle: '#FFFFFF',
+    categorySubtitle: '#FFFFFF',
+    detailBackground: '#38761D', 
+    detailLabel: '#FFFFFF',
+    detailInputBackground: '#FFFFFF',
+    detailInputText: '#000000',
+    cancelButtonText: '#FF4444',
+  },
+};
+
 const AGROSYS_COLORS = {
   // Primárias (Verde)
   primary: '#1B5E1F',

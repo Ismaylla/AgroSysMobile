@@ -1,98 +1,76 @@
+import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-// 💡 CORREÇÃO: Adicionamos 'Platform' à importação do 'react-native'
-import { StyleSheet, TouchableOpacity, Platform } from 'react-native'; 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { useThemeColor } from '@/hooks/use-theme-color';
-import { router } from 'expo-router';
+import { StyleSheet, Text, TouchableOpacity, View, StyleProp, ViewStyle } from 'react-native';
 
-// Usamos as props que o código de exemplo do usuário sugeriu
-interface CategoryCardProps {
-  icon: string; // Nome do ícone (Ionicons ou SF Symbol)
+import { Colors } from '@/constants/themes1'; 
+
+type CategoryCardProps = {
+  icon: keyof typeof Ionicons.glyphMap;
   title: string;
   subtitle: string;
   onPress: () => void;
-}
+  style?: StyleProp<ViewStyle>;
+};
 
-/**
- * Componente de cartão reutilizável para o Dashboard.
- * Adapta os nomes de ícones do Ionicons (usados no código de exemplo) para SF Symbols, 
- * que são usados pelo componente IconSymbol.
- */
-export default function CategoryCard({ icon, title, subtitle, onPress }: CategoryCardProps) {
-  const tintColor = useThemeColor({}, 'tint');
-  const cardBackgroundColor = useThemeColor({}, 'cardBackground' as any) || 'rgba(128, 128, 128, 0.05)';
-
-  // Mapeamento simples de Ionicons para SF Symbols para garantir que IconSymbol funcione.
-  // Exemplo: 'leaf-outline' -> 'leaf.fill' ou 'leaf'
-  const sfSymbolName = icon
-    .replace('-outline', '.fill')
-    .replace('leaf', 'leaf.fill')
-    .replace('cube', 'cube.fill')
-    .replace('aperture', 'map.fill'); 
-
+export default function CategoryCard({ icon, title, subtitle, onPress, style }: CategoryCardProps) {
   return (
-    <TouchableOpacity
-      style={[styles.card, { backgroundColor: cardBackgroundColor }]}
-      onPress={onPress}
-      activeOpacity={0.8}
-    >
-      <ThemedView style={styles.iconBackground}>
-        {/* Usamos 'as any' aqui para resolver o erro de tipagem SFSymbols6_0,
-            já que o nome do ícone vem de uma string dinâmica. */}
-        <IconSymbol size={30} name={sfSymbolName as any} color={tintColor} />
-      </ThemedView>
-      <ThemedView style={styles.cardContent}>
-        <ThemedText type="subtitle" style={styles.title}>{title}</ThemedText>
-        <ThemedText type="default" style={styles.subtitle}>
-          {subtitle}
-        </ThemedText>
-      </ThemedView>
-      <IconSymbol size={20} name="chevron.right" color={tintColor} />
+    <TouchableOpacity style={[styles.card, style]} onPress={onPress}>
+      <View style={styles.content}>
+        <Ionicons name={icon} size={30} color={Colors.light.categoryIcon} style={styles.icon} />
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subtitle}>{subtitle}</Text>
+        </View>
+      </View>
+      <View style={styles.button}>
+        <Text style={styles.buttonText}>Gestão de {title}</Text>
+      </View>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
+    width: '90%',
+    backgroundColor: Colors.light.categoryBackground,
+    borderRadius: 12,
+    marginBottom: 20,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  content: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 15,
-    borderRadius: 12,
-    marginBottom: 15,
-    width: '100%',
-    // Estilos de sombra unificados por plataforma (para replicar o visual)
-    ...Platform.select({
-      ios: {
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.15,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 3,
-      },
-      web: {
-        boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.15)',
-      },
-    }),
+    padding: 16,
   },
-  iconBackground: {
-    padding: 12,
-    borderRadius: 10,
+  icon: {
     marginRight: 15,
-    backgroundColor: 'rgba(0, 150, 0, 0.1)', // Fundo sutil para o ícone
   },
-  cardContent: {
+  textContainer: {
     flex: 1,
-    backgroundColor: 'transparent',
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Colors.light.categoryTitle,
+    marginBottom: 4,
   },
   subtitle: {
-    fontSize: 13,
-    opacity: 0.8,
-  }
+    fontSize: 14,
+    color: Colors.light.categorySubtitle,
+  },
+  button: {
+    backgroundColor: '#38761D',
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: Colors.light.buttonText,
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });
