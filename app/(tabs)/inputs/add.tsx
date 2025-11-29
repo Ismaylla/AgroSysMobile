@@ -156,7 +156,7 @@ export default function RegisterInputScreen() {
       </View>
 
       <BottomNavButton
-        title="+ Registrar Insumo"
+        title="Registrar Insumo"
         onPress={handleRegister}
         iconName="checkmark-circle-outline"
       />

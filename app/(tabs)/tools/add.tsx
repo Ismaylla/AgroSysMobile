@@ -150,7 +150,7 @@ export default function RegisterToolScreen() {
       </View>
 
       <BottomNavButton
-        title="+ Registrar Ferramenta"
+        title="Registrar Ferramenta"
         onPress={handleRegister}
         iconName="checkmark-circle-outline"
       />

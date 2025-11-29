@@ -146,7 +146,7 @@ export default function RegisterUAPScreen() {
       </View>
 
       <BottomNavButton
-        title="+ Registrar UAP"
+        title=" Registrar UAP"
         onPress={handleRegister}
         iconName="checkmark-circle-outline"
       />
