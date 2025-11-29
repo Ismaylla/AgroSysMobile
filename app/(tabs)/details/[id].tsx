@@ -268,10 +268,21 @@ export default function DetailsScreen() {
           </TouchableOpacity>
         </View>
       ) : (
-        // Botão de registro padrão para Produto, Insumo, UAP e caso o item não seja encontrado.
+       // Botão de registro padrão para Produto, Insumo, UAP e caso o item não seja encontrado.
         <BottomNavButton
-          title={` Registrar ${entityType}`}
-          onPress={() => router.back()}
+          title={` Registrar ${entityType}`} 
+          onPress={() => {
+            // CORRIGIDO: Lógica de navegação para a rota de cadastro correta
+            const pathMap: { [key: string]: string } = {
+              'Produto': 'products',
+              'Insumo': 'inputs',
+              'UAP': 'uaps',
+              'Ferramenta': 'tools',
+            };
+            const routePrefix = pathMap[entityType] || entityType.toLowerCase();
+            const routePath = `/${routePrefix}/add` as any;
+            router.push(routePath);
+          }}
         />
       )}
       
