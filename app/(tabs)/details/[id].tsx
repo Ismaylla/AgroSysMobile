@@ -80,7 +80,7 @@ function getEntityData(id: string, type: string) {
   if (type === 'Produto') list = AGROSYS_DATA.products;
   else if (type === 'Insumo') list = AGROSYS_DATA.inputs;
   else if (type === 'UAP') list = AGROSYS_DATA.uaps;
-  else if (type === 'Ferramenta') list = AGROSYS_DATA.tools; // Adicionado para Ferramenta
+  else if (type === 'Ferramenta') list = AGROSYS_DATA.tools; // CORRIGIDO: Adicionado busca para Ferramenta
 
   return list.find((item) => String(item.id) === String(id));
 }
@@ -114,7 +114,7 @@ const FIELD_MAP: { [key: string]: string[] } = {
     'cultivation',
     'notes',
   ],
-  Ferramenta: [ // Adicionado para Ferramenta
+  Ferramenta: [ // CORRIGIDO: Adicionado mapeamento para Ferramenta
     'name',
     'type',
     'status',
@@ -141,7 +141,7 @@ const LABEL_TRANSLATION: { [key: string]: string } = {
   responsible: 'RESPONSÁVEL',
   location: 'LOCALIZAÇÃO',
   cultivation: 'TIPO DE CULTIVO',
-  last_maintenance: 'ÚLTIMA MANUTENÇÃO', // Adicionado para Ferramenta
+  last_maintenance: 'ÚLTIMA MANUTENÇÃO', // CORRIGIDO: Adicionado tradução para Ferramenta
 };
 
 export default function DetailsScreen() {
@@ -154,9 +154,13 @@ export default function DetailsScreen() {
 
   const itemData = entityId ? getEntityData(entityId, entityType) : null;
 
-  const title = itemData ? `Detalhes do ${entityType}` : 'Item não encontrado';
+  // CORRIGIDO: Lógica para determinar o artigo correto ('do'/'da') e a forma plural ('dos'/'das')
+  const article = entityType === 'Ferramenta' ? 'da' : 'do';
+  const articlePlural = entityType === 'Ferramenta' ? 'das' : 'dos';
+
+  const title = itemData ? `Detalhes ${article} ${entityType}` : 'Item não encontrado';
   const subtitle = itemData
-    ? `Controle e Acompanhamento dos ${entityType}s`
+    ? `Controle e Acompanhamento ${articlePlural} ${entityType}s`
     : 'Verifique o ID informado.';
 
   const detailsToRender =
@@ -171,15 +175,13 @@ export default function DetailsScreen() {
 
   // Funções para os botões de ação
   const handleEdit = () => {
-    // Implementar a navegação para a tela de edição (ex: router.push(`/${entityType.toLowerCase()}/edit/${entityId}`))
+    // Implementar a navegação para a tela de edição
     alert(`EDITAR ${entityType} com ID ${entityId}`);
-    // Exemplo: router.push({ pathname: '/products/edit', params: { id: entityId, type: entityType } });
   };
   
   const handleDelete = () => {
     // Implementar a lógica de exclusão
     alert(`EXCLUIR ${entityType} com ID ${entityId}`);
-    // Exemplo: Lógica para remover o item e navegar para a tela anterior
     router.back();
   };
 
@@ -239,8 +241,8 @@ export default function DetailsScreen() {
         </ScrollView>
       </View>
       
-      {/* Lógica condicional para botões de Editar/Excluir ou Registrar */}
-      {itemData ? (
+      {/* CORRIGIDO: Lógica condicional para botões de Editar/Excluir (SÓ PARA FERRAMENTA) ou Registrar (Outros) */}
+      {itemData && entityType === 'Ferramenta' ? ( 
         <View style={[styles.actionButtonsContainer, { backgroundColor: themeColors.background }]}>
           <TouchableOpacity
             style={[
@@ -266,6 +268,7 @@ export default function DetailsScreen() {
           </TouchableOpacity>
         </View>
       ) : (
+        // Botão de registro padrão para Produto, Insumo, UAP e caso o item não seja encontrado.
         <BottomNavButton
           title={`+ Registrar ${entityType}`}
           onPress={() => router.back()}
@@ -332,7 +335,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 4,
   },
-  // NOVOS ESTILOS PARA OS BOTÕES DE AÇÃO
+  // ESTILOS PARA OS BOTÕES DE AÇÃO
   actionButtonsContainer: {
     flexDirection: 'row',
     width: '100%',
