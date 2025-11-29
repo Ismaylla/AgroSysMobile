@@ -80,6 +80,7 @@ function getEntityData(id: string, type: string) {
   if (type === 'Produto') list = AGROSYS_DATA.products;
   else if (type === 'Insumo') list = AGROSYS_DATA.inputs;
   else if (type === 'UAP') list = AGROSYS_DATA.uaps;
+  else if (type === 'Ferramenta') list = AGROSYS_DATA.tools; // Adicionado para Ferramenta
 
   return list.find((item) => String(item.id) === String(id));
 }
@@ -113,6 +114,14 @@ const FIELD_MAP: { [key: string]: string[] } = {
     'cultivation',
     'notes',
   ],
+  Ferramenta: [ // Adicionado para Ferramenta
+    'name',
+    'type',
+    'status',
+    'last_maintenance',
+    'description', 
+    'notes', 
+  ],
 };
 
 const LABEL_TRANSLATION: { [key: string]: string } = {
@@ -132,6 +141,7 @@ const LABEL_TRANSLATION: { [key: string]: string } = {
   responsible: 'RESPONSÁVEL',
   location: 'LOCALIZAÇÃO',
   cultivation: 'TIPO DE CULTIVO',
+  last_maintenance: 'ÚLTIMA MANUTENÇÃO', // Adicionado para Ferramenta
 };
 
 export default function DetailsScreen() {
