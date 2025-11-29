@@ -1,4 +1,4 @@
-// app/(drawer)/tools/index.tsx
+// app/(tabs)/tools/index.tsx
 import React from 'react';
 import {
   StyleSheet,
@@ -21,14 +21,11 @@ const ToolListItem = ({ tool }: { tool: any }) => {
   const themeColors = Colors[colorScheme];
 
   const onPressDetails = () => {
-    // Note: Usamos 'Item' como fallback, mas o ideal é que a tela de detalhes 
-    // trate o objeto tool, mas como não temos mapeamento para 'Ferramenta' no details/[id].tsx,
-    // usaremos 'Produto' por enquanto.
-    // Para um funcionamento completo, 'details/[id].tsx' precisaria de um case para 'Ferramenta'
+    // CORRIGIDO: Passa 'Ferramenta' como tipo
     router.push(
       {
         pathname: '/details/[id]',
-        params: { id: String(tool.id), type: 'Produto' }, // Requer ajustes em details/[id].tsx
+        params: { id: String(tool.id), type: 'Ferramenta' },
       } as any,
     );
   };
@@ -158,7 +155,7 @@ export default function ToolsScreen() {
               {
                 borderColor: themeColors.inputBorder,
                 backgroundColor: themeColors.inputBackground,
-                color: '#000000', // Alterado para preto fixo
+                color: '#000000', // Já corrigido para preto fixo
               },
             ]}
             placeholder="Filtros de Busca"

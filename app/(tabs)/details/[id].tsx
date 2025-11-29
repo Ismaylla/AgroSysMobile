@@ -169,6 +169,20 @@ export default function DetailsScreen() {
           }))
       : [];
 
+  // Funções para os botões de ação
+  const handleEdit = () => {
+    // Implementar a navegação para a tela de edição (ex: router.push(`/${entityType.toLowerCase()}/edit/${entityId}`))
+    alert(`EDITAR ${entityType} com ID ${entityId}`);
+    // Exemplo: router.push({ pathname: '/products/edit', params: { id: entityId, type: entityType } });
+  };
+  
+  const handleDelete = () => {
+    // Implementar a lógica de exclusão
+    alert(`EXCLUIR ${entityType} com ID ${entityId}`);
+    // Exemplo: Lógica para remover o item e navegar para a tela anterior
+    router.back();
+  };
+
   return (
     <SafeAreaView
       style={[styles.safeArea, { backgroundColor: themeColors.primary }]}
@@ -224,11 +238,40 @@ export default function DetailsScreen() {
           <View style={{ height: 100 }} />
         </ScrollView>
       </View>
-
-      <BottomNavButton
-        title={`+ Registrar ${entityType}`}
-        onPress={() => router.back()}
-      />
+      
+      {/* Lógica condicional para botões de Editar/Excluir ou Registrar */}
+      {itemData ? (
+        <View style={[styles.actionButtonsContainer, { backgroundColor: themeColors.background }]}>
+          <TouchableOpacity
+            style={[
+              styles.actionButton,
+              { backgroundColor: themeColors.buttonBackground },
+            ]}
+            onPress={handleEdit}
+          >
+            <Text style={[styles.actionButtonText, { color: themeColors.buttonText }]}>
+              EDITAR
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.actionButton,
+              { backgroundColor: 'red' }, // Cor fixa para Excluir
+            ]}
+            onPress={handleDelete}
+          >
+            <Text style={[styles.actionButtonText, { color: 'white' }]}>
+              EXCLUIR
+            </Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <BottomNavButton
+          title={`+ Registrar ${entityType}`}
+          onPress={() => router.back()}
+        />
+      )}
+      
     </SafeAreaView>
   );
 }
@@ -288,5 +331,31 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 4,
+  },
+  // NOVOS ESTILOS PARA OS BOTÕES DE AÇÃO
+  actionButtonsContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#ccc',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  actionButton: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginHorizontal: 5,
+  },
+  actionButtonText: {
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
