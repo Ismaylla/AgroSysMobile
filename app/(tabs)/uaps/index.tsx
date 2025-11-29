@@ -154,7 +154,7 @@ export default function UAPsScreen() {
               {
                 borderColor: themeColors.inputBorder,
                 backgroundColor: themeColors.inputBackground,
-                color: themeColors.detailInputText, // CORRIGIDO PARA USAR detailInputText (PRETO)
+                color: '#000000', // Alterado para preto fixo
               },
             ]}
             placeholder="Filtros de Busca"

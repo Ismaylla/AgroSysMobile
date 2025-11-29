@@ -158,7 +158,7 @@ export default function ToolsScreen() {
               {
                 borderColor: themeColors.inputBorder,
                 backgroundColor: themeColors.inputBackground,
-                color: themeColors.detailInputText, // Texto preto
+                color: '#000000', // Alterado para preto fixo
               },
             ]}
             placeholder="Filtros de Busca"

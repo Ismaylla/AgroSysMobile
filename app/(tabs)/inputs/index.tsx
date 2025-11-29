@@ -154,7 +154,7 @@ export default function InputsScreen() {
               {
                 borderColor: themeColors.inputBorder,
                 backgroundColor: themeColors.inputBackground,
-                color: themeColors.detailLabel,
+                color: '#000000', // Alterado para preto fixo
               },
             ]}
             placeholder="Filtros de Busca"

@@ -154,7 +154,7 @@ export default function ProductsScreen() {
               {
                 borderColor: themeColors.inputBorder,
                 backgroundColor: themeColors.inputBackground,
-                color: themeColors.detailInputText,
+                color: '#000000', // Alterado para preto fixo
               },
             ]}
             placeholder="Filtros de Busca"
