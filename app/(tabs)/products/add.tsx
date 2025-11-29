@@ -173,7 +173,7 @@ export default function RegisterProductScreen() {
       </View>
 
       <BottomNavButton
-        title="+ Registrar Produto"
+        title="Registrar Produto"
         onPress={handleRegister}
         iconName="checkmark-circle-outline"
       />

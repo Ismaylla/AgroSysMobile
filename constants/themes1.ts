@@ -19,8 +19,8 @@ export const Colors = {
     categorySubtitle: '#FFFFFF',
     detailBackground: '#38761D', // Fundo dos campos de detalhe/cadastro
     detailLabel: '#FFFFFF',
-    detailInputBackground: '#0a0a0aff',
-    detailInputText: '#ffffffff',
+    detailInputBackground: '#FFFFFF',
+    detailInputText: '#000000',
     cancelButtonText: '#FF0000', 
   },
   dark: {
